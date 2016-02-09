@@ -1,0 +1,12 @@
+language: rust
+after_success: |
+  [ $TRAVIS_BRANCH = master ] &&
+  [ $TRAVIS_PULL_REQUEST = false ] &&
+  cargo doc --no-deps &&
+  echo "<meta http-equiv=refresh content=0;url=`echo microlib | cut -d '/' -f 2`/index.html>" > target/doc/index.html &&
+  git clone https://github.com/davisp/ghp-import &&
+  ./ghp-import/ghp-import target/doc &&
+  git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+env:
+  global:
+    secure: gfzQGQYiHMsAYph6pDZoWxvmIxflcMWDQJ3DVKOw3A6Ue4rC9KGrqxlT1I+NzhMPEwDtwS2QWaLq/TE3RyVpNfwf9KM31X20ijtaZALeeedriNUN3IPReFha4oBX+5g+MJcC2V3UwMEA4z6mMOArW+hb+pRiWCbOzC7Ze4SIQZlYttFs1NvbRKklrbxszgpUY4mSrpe0CoEUT3TXtB9eTEyL7Sk4eJH6jYrywbZiAfO6Q099gTWS/tGae+WrN//+d6agT8Klyj66fOt3ZhY7FLMbwTyXOSVWUkgROjPkhYzYooKVuW3uh5+it/xulMy6wHPO2KALMUdFxe9M7chbZWUNuGDfPvuufmGp9sJ2Gdclsm1R+WfLOufYnBLf3dKd1+/dllkl4eI4Rf4m52bbsjrAXSHC8g7E6vfOomYZSafmyScWUlXU9EhKAEgmqB+LxFNY04wLLnpExvtTrkFvuLqsXk+K6zrTxP4azpExsjA/WUhN2mNduAcIMydWgQlIgQsOad0hKgAqynVqx0/KtCmHiPXRBo4ISn73jVl4b6RHRZIzYXhwURNbN7QjLanwL7QlCAPmhWKPjE1pbCv4/qGZeMDaFFSaqiNjEEfdA2BT1DYrdsku4R7yrLcWP0BgFxBaGozdZvpUk6lvsWQz6g0vGB43sJ8L9DrpXda1ybU=
