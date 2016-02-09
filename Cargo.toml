@@ -1,0 +1,4 @@
+[package]
+name = "microlib"
+version = "0.1.0"
+authors = ["Reginald Marshall <rgdmarshall@yahoo.com>"]
